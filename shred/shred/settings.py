@@ -74,10 +74,23 @@ WSGI_APPLICATION = 'shred.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
+
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'NAME': 'shredb',
+
+        'USER': 'shredb_user',
+
+        'PASSWORD': '12345!@#$%',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
+
     }
+
 }
 
 
