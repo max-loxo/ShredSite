@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 
-class users(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
@@ -14,7 +14,7 @@ class users(models.Model):
     stance = models.CharField(max_length=50)
 
 
-class current_trip(models.Model):
+class CurrentTrip(models.Model):
     location = models.CharField(max_length=50)
     airbnb = models.CharField(max_length=50)
     airbnb = models.CharField(max_length=50)
