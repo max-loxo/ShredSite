@@ -13,8 +13,6 @@ class User(models.Model):
     riding = models.CharField(max_length=50)
     stance = models.CharField(max_length=50)
 
-
 class CurrentTrip(models.Model):
     location = models.CharField(max_length=50)
-    airbnb = models.CharField(max_length=50)
     airbnb = models.CharField(max_length=50)
