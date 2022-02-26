@@ -43,6 +43,7 @@ class Trips(models.Model):
     date = models.DateField()
     user = models.ManyToManyField(User)
 
+
 class Resort(models.Model):
     EPIC = 'EPC'
     ICON = 'IKN'
@@ -56,4 +57,3 @@ class Resort(models.Model):
     price = models.IntegerField()
     trails = models.IntegerField()
     url = models.i
-    
