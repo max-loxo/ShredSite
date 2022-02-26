@@ -15,7 +15,7 @@ export default class CustomModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: this.props.activeItem,
+      activeUser: this.props.activeUser,
     };
   }
 
@@ -26,9 +26,9 @@ export default class CustomModal extends Component {
       value = e.target.checked;
     }
 
-    const activeItem = { ...this.state.activeItem, [name]: value };
+    const activeUser = { ...this.state.activeUser, [name]: value };
 
-    this.setState({ activeItem });
+    this.setState({ activeUser });
   };
 
   render() {
@@ -40,12 +40,12 @@ export default class CustomModal extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="user-first-name">First Name</Label>
+              <Label for="user-firstName">First Name</Label>
               <Input
                 type="text"
-                id="user-first-name"
-                name="first-name"
-                value={this.state.activeItem.firstName}
+                id="user-firstName"
+                name="first_name"
+                value={this.state.activeUser.first_name}
                 onChange={this.handleChange}
                 placeholder="Enter User First Name"
               />
@@ -54,9 +54,9 @@ export default class CustomModal extends Component {
               <Label for="user-last-name">Last Name</Label>
               <Input
                 type="text"
-                id="user-last-name"
-                name="last-name"
-                value={this.state.activeItem.lastName}
+                id="user-lastName"
+                name="last_name"
+                value={this.state.activeUser.last_name}
                 onChange={this.handleChange}
                 placeholder="Enter User Last Name"
               />
@@ -67,17 +67,18 @@ export default class CustomModal extends Component {
                 type="text"
                 id="user-email"
                 name="email"
-                value={this.state.activeItem.email}
+                value={this.state.activeUser.email}
                 onChange={this.handleChange}
                 placeholder="Enter User email"
               />
-              <FormGroup>
+            </FormGroup>
+            <FormGroup>
               <Label for="user-riding">Sport Preference</Label>
               <Input
                 type="text"
                 id="user-riding"
                 name="riding"
-                value={this.state.activeItem.riding}
+                value={this.state.activeUser.riding}
                 onChange={this.handleChange}
                 placeholder="Enter Users preffered sport"
               />
@@ -88,28 +89,17 @@ export default class CustomModal extends Component {
                 type="text"
                 id="user-stance"
                 name="stance"
-                value={this.state.activeItem.stance}
+                value={this.state.activeUser.stance}
                 onChange={this.handleChange}
                 placeholder="Enter User Stance"
               />
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="checkbox"
-                  name="completed"
-                  checked={this.state.activeItem.completed}
-                  onChange={this.handleChange}
-                />
-                Completed
-              </Label>
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => onSave(this.state.activeItem)}
+            onClick={() => onSave(this.state.activeUser)}
           >
             Save
           </Button>

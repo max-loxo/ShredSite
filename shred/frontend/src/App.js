@@ -1,40 +1,67 @@
 import React, { Component } from "react";
-
-const todoItems = [
-  {
-    id: 1,
-    title: "Go to Market",
-    description: "Buy ingredients to prepare dinner",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Study",
-    description: "Read Algebra and History textbook for the upcoming test",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Sammy's books",
-    description: "Go to library to return Sammy's books",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "Article",
-    description: "Write article on how to use Django with React",
-    completed: false,
-  },
-];
+import { NavItem } from "reactstrap";
+import Modal from "./components/Modal";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewCompleted: false,
-      todoList: todoItems,
+      userList: [],
+      modal:false,
+      activeUser :{
+        first_name: "",
+        last_name:"",
+        email:"",
+        riding: "",
+        stance:"",
+      }
     };
   }
+  componentDidMount() {
+    this.refreshList();
+  }
+  refreshList = () => {
+    axios
+    .get("/api/users/")
+    .then((res) => this.setState({userList: res.data}))
+    .catch((err) => console.log(err));
+  };
+
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+  };
+
+  handleSubmit = (user) => {
+    console.log(user)
+    this.toggle();
+    if (user.id) {
+      axios
+        .put(`/api/users/${user.id}/`, user)
+        .then((res) => this.refreshList());
+      return;
+    }
+    axios
+      .post("/api/users/", user)
+      .then((res) => this.refreshList());
+  };
+
+  handleDelete = (user) => {
+    axios
+      .delete(`/api/todos/${user.id}/`)
+      .then((res) => this.refreshList());
+  };
+
+  createUser = () => {
+    const user = { first_name: "", last_name: "", email:"",riding: "",stance: "" };
+
+    this.setState({ activeUser: user, modal: !this.state.modal });
+  };
+
+  editItem = (user) => {
+    this.setState({ activeUser: user, modal: !this.state.modal });
+  };
 
   displayCompleted = (status) => {
     if (status) {
@@ -63,33 +90,35 @@ class App extends Component {
     );
   };
 
-  renderItems = () => {
+  renderUsers = () => {
     const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
-      (item) => item.completed == viewCompleted
+    const newUsers = this.state.userList.filter(
+      (user) => user.completed === viewCompleted
     );
 
-    return newItems.map((item) => (
+    return newUsers.map((user) => (
       <li
-        key={item.id}
+        key={user.id}
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
           className={`todo-title mr-2 ${
             this.state.viewCompleted ? "completed-todo" : ""
           }`}
-          title={item.description}
+          title={user.last_name}
         >
-          {item.title}
+          {user.last_name}
         </span>
         <span>
           <button
             className="btn btn-secondary mr-2"
+            onClick={() => this.editItem(user)}
           >
             Edit
           </button>
           <button
             className="btn btn-danger"
+            onClick={() => this.handleDelete(user)}
           >
             Delete
           </button>
@@ -101,24 +130,32 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-white text-uppercase text-center my-4">Todo app</h1>
+        <h1 className="text-white text-uppercase text-center my-4">Shred App</h1>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
                 <button
                   className="btn btn-primary"
+                  onClick={this.createUser}
                 >
                   Add User
                 </button>
               </div>
               {this.renderUserList()}
               <ul className="list-group list-group-flush border-top-0">
-                {this.renderItems()}
+                {this.renderUsers()}
               </ul>
             </div>
           </div>
         </div>
+        {this.state.modal ? (
+          <Modal
+            activeUser={this.state.activeUser}
+            toggle={this.toggle}
+            onSave={this.handleSubmit}
+          />
+        ) : null}
       </main>
     );
   }
