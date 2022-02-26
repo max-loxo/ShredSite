@@ -97,9 +97,9 @@ DATABASES = {
 }
 
 # superuser
-#username: israelmolestina
+#username: izy
 # email molestinaisrael@gmail.com
-# password 12345!@#$%
+# password 1234
 
 
 # Password validation
