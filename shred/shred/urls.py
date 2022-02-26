@@ -19,10 +19,10 @@ from shredApp import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserView, 'users')
-router.register(r'trips',views.CurrentTripView,'trips')
+router.register(r'trips', views.TripsView, 'trips')
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('api/',include(router.urls))
+    path('api/', include(router.urls))
 ]
