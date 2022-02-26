@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework'
+    'shredApp'
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,11 @@ DATABASES = {
     }
 
 }
+
+# superuser
+#username: israelmolestina
+# email molestinaisrael@gmail.com
+# password 12345!@#$%
 
 
 # Password validation
