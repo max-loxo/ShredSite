@@ -11,4 +11,18 @@ class UserSerializer(serializers.ModelSerializer):
 class TripsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trips
-        fields = ("location", "airbnb")
+        fields = ("location", "airbnb", "date")
+
+
+class ResortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resort
+        fields = ("pass_choice", "name", "base_elevation",
+                  "peak_elevation", "price", "trails", "url", "image_url")
+
+
+class LodgingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lodging
+        fields = ("status", "name", "url",
+                  "distance", "price", "image_url")

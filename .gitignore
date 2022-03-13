@@ -33,6 +33,8 @@ MANIFEST
 *.manifest
 *.spec
 
+.DS_Store
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -50,6 +52,8 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+
+/node_modules
 
 # Translations
 *.mo

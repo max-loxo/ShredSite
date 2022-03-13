@@ -1,8 +1,4 @@
-from random import choices
-from statistics import mode
-from weakref import ReferenceType
 from django.db import models
-from django.forms import CharField
 
 # Create your models here.
 
@@ -28,13 +24,13 @@ class User(models.Model):
         choices=RIDING_CHOICES,
         default=BOARD,
         blank=False
-    ),
+    )
     stance = models.CharField(
         max_length=3,
         choices=STANCE_CHOICES,
         default=REGULAR,
         blank=False
-    ),
+    )
 
 
 class Trips(models.Model):
